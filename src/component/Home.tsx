@@ -1,5 +1,6 @@
 import  { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Check } from "lucide-react";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ const Home = () => {
     { src: "/img4.png", padding: "pt-32 pr-20", width: "w-[650px]", height: "h-[450px]" },
   ];
 
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  // const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [nextImageIndex, setNextImageIndex] = useState(1);
   const [isFading, setIsFading] = useState(false);
 
@@ -20,39 +21,40 @@ const Home = () => {
       setIsFading(true);
 
       setTimeout(() => {
-        setCurrentImageIndex(nextImageIndex);
+        // setCurrentImageIndex(nextImageIndex);
         setNextImageIndex((nextImageIndex + 1) % images.length);
         setIsFading(false);
       }, 3000); // fade duration
-    }, 4000); // change every 6 sec
+    }, 2000); // change every 6 sec
 
     return () => clearInterval(interval);
   }, [nextImageIndex]);
 
-  const current = images[currentImageIndex];
+  // const current = images[currentImageIndex];
   const next = images[nextImageIndex];
 
   return (
     <div className="min-h-screen bg-[#5364cd] text-gray-800 relative overflow-hidden">
 
       {/* Current Image */}
-      <img
+      {/* <img
         src={current.src}
         alt="Hero"
-        className={`fixed top-0 object-contain object-center right-0 hidden md:block rounded-2xl z-0 
+        className={`fixed top-0  right-0 hidden md:block rounded-2xl z-0 
           transition-opacity duration-[2000ms] ease-in-out
           ${current.padding} 
           ${current.width}
+          ${next.height}
          
             h-xl
           ${isFading ? "opacity-0" : "opacity-100"}`}
-      />
+      /> */}
 
       {/* Next Image on top */}
       <img
         src={next.src}
         alt="Hero next"
-        className={`fixed top-0 right-0 hidden md:block rounded-4xl z-0 object-contain object-center 
+        className={`fixed top-0  right-0 hidden md:block rounded-4xl z-0 object-contain object-center 
           transition-opacity duration-[2000ms] ease-in-out
           ${next.padding} ${next.width} ${next.height} max-w-[50%]
           ${isFading ? "opacity-100" : "opacity-0"}`}
@@ -67,7 +69,7 @@ const Home = () => {
             <a href="#Start-Download">
               <button className="hover:bg-[red] py-3 px-4 rounded-lg">Get Download</button>
             </a>
-            <button className="hover:bg-[red] py-3 px-4 rounded-lg">Blog</button>
+            <button className="hover:bg-[red] py-3 px-4 rounded-lg" onClick={()=>navigate('/blog')}>Blog</button>
             <a href="#Contacts">
               <button className="hover:bg-[red] py-3 px-4 rounded-lg">Contacts</button>
             </a>
@@ -76,51 +78,105 @@ const Home = () => {
       </nav>
 
       {/* Content Wrapper */}
-      <div className="relative z-10 pt-24 md:pt-32">
+      <div className="relative  z-10 pt-24 md:pt-32">
         {/* Hero Section */}
-        <section className="px-6 md:px-20 py-16 text-white max-w-4xl">
-          <h1 className="text-3xl md:text-5xl font-bold leading-snug mb-6">
-            Activate McAfee LiveSafe with Your 25-Digit Code
-          </h1>
-          <p className="text-lg mb-6">
-            Follow this guide to securely activate your McAfee subscription and protect your devices within minutes.
-          </p>
-          <button
-            onClick={() => navigate('/entercode')}
-            className="bg-red-600 hover:bg-red-700 transition-all text-white px-6 py-3 rounded font-semibold"
-          >
-            Enter Activation Code
-          </button>
-        </section>
+        <section className="flex flex-col-reverse md:flex-row items-center justify-between px-4 md:px-20 py-16  text-white">
+  {/* Left Text Section */}
+  <div className="w-full md:w-1/2 max-w-xl">
+    <h1 className="text-3xl md:text-4xl font-bold leading-snug mb-6">
+    Step to Use Your Retail Card's 25-Digit Code to Activate McAfee LiveSafe
+    </h1>
+    <p className="text-lg mb-6">
+    Follow this guide to quickly and securely activate your McAfee protection.
+    </p>
+    <button
+      onClick={() => navigate("/entercode")}
+      className="bg-red-600 hover:bg-red-700 transition-all text-white px-6 py-3 rounded font-semibold"
+    >
+      Submit Activation Code
+    </button>
+  </div>
+
+  {/* Right Image Section */}
+  
+</section>
+
 
         {/* Steps Overview */}
         <section className="bg-white py-14 px-6 md:px-20">
-          <h2 className="text-2xl md:text-4xl font-bold text-[#333] mb-8 text-center">Getting Started</h2>
+          <h2 className="text-2xl md:text-4xl font-bold text-[#333]  text-center">Step-by-Step: Activating Your McAfee Product</h2>
+          <p className="text-2xl md:text-xl pt-4  text-center mb-12 ">To ensure optimal protection and uninterrupted service, follow these structured steps to successfully activate your McAfee antivirus software:</p>
 
           <div className="grid md:grid-cols-2 gap-10">
             <div>
-              <h3 className="text-xl font-semibold mb-2">Step 1: Visit Activation Page</h3>
-              <p>
-                Go to <span className="text-blue-600 font-medium">www.mcafee.com/activate</span> in your browser.
-              </p>
+              <h3 className="text-xl font-bold mb-2">Step 1:  Retrieve Your Activation Code</h3>
+              <ul className="list-disc ml-6">
+               <li> The activation code is a 25-character alphanumeric key required to initiate the setup.</li>
+               <li>For online purchases, this code is typically provided in your confirmation email.</li>
+               <li>For retail purchases, you can find it on the product card or inside the packaging.</li> 
+             
+
+
+
+
+              </ul>
             </div>
             <div>
-              <h3 className="text-xl font-semibold mb-2">Step 2: Sign In or Create Account</h3>
-              <p>
-                Use your McAfee account to sign in, or quickly register a new one if you're a first-time user.
-              </p>
+              <h3 className="text-xl font-bold  mb-2">Step 2: Access the Official Activation Portal</h3>
+              <ul className="list-disc ml-6">
+                <li>Navigate to the official McAfee activation page: <a href="https://www.mcafee.com/en-in/index.html">
+                  <p className="text-[#3030c3]">
+                  www.mcafee.com/activate.
+                  </p>
+                  </a>
+                </li>
+                <li>Always ensure the website URL is correct to avoid phishing or fraudulent websites.</li>
+              
+
+              </ul>
             </div>
             <div>
-              <h3 className="text-xl font-semibold mb-2">Step 3: Enter 25-digit Code</h3>
-              <p>
-                Enter the code you received with your purchase. This will link the subscription to your account.
-              </p>
+              <h3 className="text-xl font-bold mb-2">Step 3:  Sign In or Create a McAfee Account</h3>
+              <ul className="list-disc ml-6">
+                <li>              Log in with your existing McAfee credentials.
+                </li>
+                <li>If you are a new user, create a McAfee account using a valid and accessible email address.</li>
+                <li>Your account will serve as the central hub for managing your subscriptions and devices.</li>
+
+
+
+
+
+              </ul>
             </div>
             <div>
-              <h3 className="text-xl font-semibold mb-2">Step 4: Download & Install</h3>
-              <p>
-                Once the code is verified, download the installer and follow the on-screen installation steps.
-              </p>
+              <h3 className="text-xl font-bold mb-2">Step 4: Enter the Activation Details</h3>
+              <ul className="list-disc ml-6">
+                <li>Input the 25-digit activation code in the designated field.</li>
+                <li>Select your preferred country and language settings.</li>
+                <li >
+  Click <span className="font-bold">Submit</span> to validate and link the code with your McAfee account.
+</li>
+
+
+
+
+
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-bold mb-2">Step 5:  Download and Install the Software</h3>
+              <ul className="list-disc ml-6">
+                <li>Once activation is complete, proceed to download the McAfee software.
+                </li>
+                <li>Follow the on-screen installation prompts to install the program on your device.</li>
+                <li>Upon successful installation, restart your system if prompted to finalize setup.</li>
+              
+
+
+
+              </ul>
             </div>
           </div>
         </section>
@@ -143,64 +199,162 @@ const Home = () => {
 
         {/* Benefits Section */}
         <section className="bg-white py-14 px-6 md:px-20">
-          <h2 className="text-2xl md:text-4xl font-bold text-center mb-8">Why Choose McAfee?</h2>
-          <ul className="space-y-4 text-gray-700 max-w-4xl mx-auto">
-            <li>✔️ Real-time Threat Detection</li>
-            <li>✔️ Password Manager & Web Protection</li>
-            <li>✔️ Coverage for All Your Devices</li>
-            <li>✔️ Parental Controls for Safer Browsing</li>
-            <li>✔️ 24/7 Support & Security Updates</li>
+          <h2 className="text-2xl md:text-4xl font-bold text-center mb-4">Top Reasons to Trust McAfee</h2>
+          <p className="  lg:px-48  mb-10  mx-auto">McAfee is a trusted name in cybersecurity, offering comprehensive protection for your devices and personal data. Here’s a step-by-step explanation of why McAfee stands out:</p>
+          <ul className="list-decimal space-y-4 text-gray-700 max-w-4xl mx-auto">
+            
+            <li > <span className="font-bold  ">
+             Real-Time Threat Protection:
+              </span> McAfee continuously monitors your system, detecting and blocking viruses, malware, and ransomware in real-time.
+            </li>
+            <li >
+              <span className="font-bold  ">
+              
+              Multi-Device Support:
+              </span> You can secure multiple devices (PCs, smartphones, tablets) under one subscription, ensuring safety across all platforms.</li>
+            <li>
+              <span className="font-bold  ">
+                Identity Theft Protection:
+              </span> McAfee provides tools to safeguard personal information, including credit monitoring and alerts for suspicious activity.</li>
+            <li >
+              <span className="font-bold  ">
+              User-Friendly Interface:
+              </span> The software is easy to install and use, with a dashboard that makes managing security settings simple for any user.</li>
+            <li >
+              <span className="font-bold  ">
+           Web and Wi-Fi Security:
+              </span> It blocks dangerous websites and protects you when using public Wi-Fi, preventing hackers from accessing your data.</li>
+            <li >
+              <span className="font-bold  ">
+              Regular Updates:
+              </span>
+              McAfee updates frequently to stay ahead of evolving threats, keeping your devices secure at all times.</li>
           </ul>
         </section>
 
         {/* Redeem Card Section */}
         <section className="bg-white py-16 px-6 md:px-20">
-          <h2 className="text-2xl md:text-4xl font-bold text-center mb-10">How to Redeem Your McAfee Card</h2>
+          <h2 className="text-2xl md:text-4xl font-bold text-center mb-10">How to Redeem Your McAfee Card – Step-by-Step</h2>
           <div className="max-w-4xl mx-auto space-y-6 text-gray-700">
             <p>
-              If you purchased a McAfee activation card from a retail store, follow these steps to redeem it and start your protection:
+            Redeeming your McAfee card is simple if you follow these steps:
             </p>
             <ol className="list-decimal list-inside space-y-3">
-              <li>Scratch off the silver panel on the back of your card to reveal the 25-digit activation code.</li>
-              <li>Go to <span className="text-blue-600 font-medium">www.mcafee.com/activate</span>.</li>
-              <li>Sign in or create a new McAfee account if you don’t have one.</li>
-              <li>Enter the 25-digit code when prompted and click “Submit.”</li>
-              <li>Your subscription will now be linked to your account. You can download your McAfee product immediately.</li>
+              <li><span className="font-bold">
+
+                Locate Your Product Key:
+                </span> Find the 25-digit activation code on your McAfee card (e.g., XXXXX-XXXXX-XXXXX-XXXXX-XXXXX).
+              </li>
+              <li>
+              <span className="font-bold"> 
+
+                Visit the Redemption Site:
+              </span> Go to <a href="https://www.mcafee.com/en-in/index.html" className="text-[#2525d1]">
+              www.mcafee.com/activate
+              </a> using your preferred web browser.
+                </li>
+              <li>
+              <span className="font-bold"> 
+
+                Enter the Code:
+              </span> Type in your activation code exactly as shown on your card and click <span className="font-bold">
+                
+                Submit
+                </span>
+              </li>
+              <li>
+              <span className="font-bold">
+                
+                Sign In or Create an Account:
+                 </span> If you already have a McAfee account, sign in. If not, create a new account using your email address and a secure password.
+              </li>
+              <li>
+              <span className="font-bold"> 
+
+                Download and Install:
+              </span> After redeeming the code, follow the on-screen instructions to download and install McAfee on your device.
+              </li>
+              <li><span className="font-bold"> 
+
+            Activate Your Protection:
+              </span> Once installed, open the app and ensure your subscription is active.
+
+            </li>
             </ol>
             <p>
-              Make sure to redeem the card within the validity period mentioned. Lost cards or used codes cannot be reissued.
+            Your McAfee protection is now ready and working to keep your devices secure.
+
             </p>
           </div>
         </section>
 
         {/* Troubleshooting Section */}
         <section className="bg-gray-50 py-16 px-6 md:px-20">
-          <h2 className="text-2xl md:text-4xl font-bold text-center mb-10">Common Activation Issues & Fixes</h2>
-          <div className="max-w-4xl mx-auto space-y-8 text-gray-700">
-            <div>
-              <h3 className="font-semibold text-xl mb-2">🚫 Invalid Activation Code</h3>
-              <p>
-                Double-check the 25-digit code for typos. Make sure you're entering it exactly as printed, including dashes if required.
+          <h2 className="text-2xl md:text-4xl font-bold text-center mb-3">Activation Not Working? Here's What to Do</h2>
+          <p className="  text-center mb-10">Activating software can sometimes be tricky. Let’s break it down step-by-step :
+          </p>
+          <div className=" flex-col items-center flex justify-center space-y-8 text-gray-700">
+            <ul className="list-decimal text-lg space-y-8">
+              <li ><span className="font-bold">
+              Invalid Key
+                </span> : Double-check the license key . Copy-paste errors or typos are common.
+              <p className="flex flex-row ">
+              <Check className="text-green-600  w-10  text-2xl h-5" /> Fix: Re-enter the key carefully. Ensure no extra spaces.
+              </p></li>
+           
+            {/* <div> */}
+              <li >
+                <span className="font-bold">
+                No Internet Connection
+                </span> : Activation often requires a stable internet connection.
+              
+              <p className="flex flex-row ">
+              <Check className="text-green-600  w-10  text-2xl h-5" /> Fix: Reconnect to the internet and retry.
+
+              </p></li>
+            {/* </div> */}
+            
+           
+              <li>
+                <span className="font-bold">
+                Exceeded Device Limit
+                </span> : Some licenses are restricted to a set number of devices.
+              
+              <p className="flex flex-row ">
+              <Check className="text-green-600  w-10  text-2xl h-5" /> Fix: Deactivate unused devices or upgrade your license.
+
               </p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-xl mb-2">⚠️ Account Not Recognized</h3>
-              <p>
-                Ensure you’re using the same email address that you registered with. If needed, reset your password or create a new account.
+              </li>
+           
+           
+              <li >
+                <span className="font-bold">
+                Firewall or Antivirus Block
+                </span> : Security software might block activation servers.
+              
+              <p className="flex flex-row ">
+              <Check className="text-green-600  w-10  text-2xl h-5" /> Fix: Temporarily disable firewalls or whitelist the app.
+
               </p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-xl mb-2">📥 Download Not Starting</h3>
-              <p>
-                Disable browser pop-up blockers or antivirus software temporarily. Try another browser if the issue persists.
+              </li>
+           
+
+            
+              <li >
+                <span className="font-bold"> Server Issues
+                  </span> : Sometimes, the activation server is down.
+
+              
+              <p className="flex flex-row ">
+              <Check className="text-green-600  w-10  text-2xl h-5" /> Fix: Wait and try again later.
+
               </p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-xl mb-2">🛑 Installation Errors</h3>
-              <p>
-                Remove any old antivirus programs from your device before installing McAfee. Restart your system and try again.
-              </p>
-            </div>
+              </li>
+            
+            </ul>
+            <p className="flex flex-row ">
+              <Check className="text-white bg-green-500  w-5  text-2xl h-5 mr-3 rounded-md" /> Always refer to the official support page if problems persist.
+            These steps help most users activate without hassle! </p>
           </div>
         </section>
 
